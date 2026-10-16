@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Balloon Pop · hand-gesture-kit</title>
+    <meta name="description" content="A tiny example game controlled by webcam hand gestures." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%88%3C/text%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="/src/pop/pop.css" />
+  </head>
+  <body>
+    <canvas id="game"></canvas>
+    <video id="cam" playsinline muted></video>
+    <div class="hud">
+      <span id="score">0</span>
+      <span id="time">45</span>
+      <span id="best">best 0</span>
+    </div>
+    <div class="hints">🤏 pinch tap: pop · ✌️ double tap: burst · ☝️ point: laser · 👋 swipe: wind · 👏 clap: pop all · 👍 thumbs up: start</div>
+    <div id="overlay" class="overlay">
+      <h1>🎈 Balloon Pop</h1>
+      <p id="msg">Pop as many balloons as you can in 45 seconds, using only your hands.</p>
+      <div class="row">
+        <button id="b-cam">Start camera</button>
+        <button id="b-mouse" class="ghost">Play with the mouse</button>
+      </div>
+      <p id="err" class="err"></p>
+      <p class="small"><a href="./index.html">Demo</a> · <a href="./lab.html">Gesture Lab</a></p>
+    </div>
+    <script type="module" src="/src/pop/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "name": "hand-gesture-kit",
+  "version": "0.1.0",
+  "description": "Webcam hand gestures for the browser: MediaPipe hand tracking plus a gesture engine (20 poses, swipes, circles, taps, claps, two-hand zoom) with a testing lab and synthetic hands.",
+  "license": "MIT",
+  "type": "module",
+  "keywords": ["hand-tracking", "gestures", "mediapipe", "webcam", "hand-gesture-recognition", "game-input", "three.js"],
+  "scripts": {
+    "assets": "node scripts/copy-mediapipe.mjs",
+    "dev": "npm run assets && vite --host",
+    "build": "npm run assets && tsc --noEmit && vite build",
+    "preview": "vite preview --host",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "e2e": "node scripts/e2e.mjs"
+  },
+  "dependencies": {
+    "@mediapipe/tasks-vision": "1.1.0"
+  },
+  "devDependencies": {
+    "playwright": "^1.64.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.4"
+  }
+}
