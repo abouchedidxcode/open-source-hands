@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "description": "Webcam hand gestures for the browser: MediaPipe hand tracking plus a gesture engine (20 poses, swipes, circles, taps, claps, two-hand zoom) with a testing lab and synthetic hands.",
   "license": "MIT",
+  "repository": { "type": "git", "url": "https://github.com/abouchedidxcode/open-source-hands.git" },
+  "homepage": "https://abouchedidxcode.github.io/open-source-hands/",
   "type": "module",
   "keywords": ["hand-tracking", "gestures", "mediapipe", "webcam", "hand-gesture-recognition", "game-input", "three.js"],
   "scripts": {

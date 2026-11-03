@@ -107,6 +107,7 @@ export class HandTracker {
     if (!navigator.mediaDevices?.getUserMedia) {
       throw Object.assign(new Error('Camera API unavailable (insecure context or unsupported browser)'), { name: 'NotSupportedError' });
     }
+    this.stopped = false; // a retry after a failed start (or after stop()) must run normally
     const camera = this.openCamera();
     const model = this.createLandmarker();
     // Don't leave a dangling rejection if one side fails first.

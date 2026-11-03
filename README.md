@@ -1,38 +1,59 @@
-# 👋 hand-gesture-kit
+# open-source-hands
 
-Webcam hand gestures for the browser. Show your hands to the camera and get stable, game-ready
-events: **20 poses** (fist, point, peace sign, thumbs up, rock on, middle finger, pinch…), **16
-motions** (swipes, circles, push/pull, wave, shake, twist, pinch taps, throw) and **5 two-hand
-gestures** (clap, zoom, steering). It runs entirely in the browser. Video never leaves the
-device.
+Make webcam hand games for the browser, or point your coding agent here and have it make one for you.
 
-It is built on Google's [MediaPipe Hand Landmarker](https://ai.google.dev/edge/mediapipe/solutions/vision/hand_landmarker),
-which finds 21 points on each hand. This kit adds what a game needs on top of those points:
-- smoothing
-- pose scoring with hysteresis, so gestures don't flicker
-- motion detection
-- two-hand gestures
-- a lab for testing and tuning gestures
-- synthetic hands, so you can test without a webcam
+This is the technology behind [Show of Hands](https://meticulai.com/games/show-of-hands/), a hall of 15 small games
+played with your hands:
+- catch fireflies at dusk
+- skip stones across a lake
+- tilt a maze with your palm
+- duel with finger guns
+- hold up 1 to 5 fingers as numbers fall
 
-**Live:** [demo](https://abouchedidxcode.github.io/hand-gesture-kit/) ·
-[Gesture Lab](https://abouchedidxcode.github.io/hand-gesture-kit/lab.html) ·
-[example game](https://abouchedidxcode.github.io/hand-gesture-kit/pop.html).
-**Made with it:** [GODHAND](https://abouchedidxcode.github.io/hands/), a hand-controlled war
-game, and [City Smash](https://abouchedidxcode.github.io/hands/sandbox.html?mode=city), where you
-wreck a city with 17 gesture powers.
+Also [GODHAND](https://meticulai.com/games/godhand/) and [Starbreaker](https://meticulai.com/games/starbreaker/).
+Everything runs in the browser, and video never leaves the device.
+
+What is in the repo:
+- **`src/kit/`: hand-gesture-kit,** about 1,600 lines of dependency-free TypeScript on top of Google's
+  [MediaPipe Hand Landmarker](https://ai.google.dev/edge/mediapipe/solutions/vision/hand_landmarker), which finds 21
+  points on each hand. The kit turns those points into stable, game-ready input:
+  - **20 poses:** fist, point, peace sign, thumbs up, rock on, pinch…
+  - **16 motions:** swipes, circles, push and pull, wave, twist, pinch taps, throw
+  - **5 two-hand gestures:** clap, zoom, steering
+  - **continuous values:** pinch strength, palm position, roll, openness, velocity
+  - **built in:** One Euro smoothing, hysteresis, so gestures don't flicker, and **synthetic hands** to test
+    without a webcam
+- **[`templates/game/`](templates/game): a complete starter game** in three.js. It has a camera prompt with a mouse
+  and touch fallback, a bot that plays through the real gesture engine, tests, and screenshot, frame-rate and
+  loudness tools. Copy it and replace the game.
+- **[`docs/MAKING-A-GAME.md`](docs/MAKING-A-GAME.md): the playbook** from building 17 hand games: picking gestures
+  that work, verifying without a webcam, the quality bar, and the bugs that cost us time.
+- **[Gesture Lab](https://abouchedidxcode.github.io/open-source-hands/lab.html):** try every gesture live, run a
+  reliability test and tune thresholds. There is also a [demo](https://abouchedidxcode.github.io/open-source-hands/)
+  and a tiny [example game](https://abouchedidxcode.github.io/open-source-hands/pop.html).
 
 ## Using a coding agent?
 
-Point it here. The repo is written to be read by agents. [AGENTS.md](AGENTS.md) explains how to
-wire the kit into a project, the common pitfalls, and how to test without a camera. For example:
+Point it here. The repo is written to be read by agents. [AGENTS.md](AGENTS.md) is the entry point. For example:
 
-> Build me a browser game where I fly a spaceship with my hands. Use
-> https://github.com/abouchedidxcode/hand-gesture-kit and follow its AGENTS.md.
+> Make me a browser game where I conduct an orchestra with my hands. Use
+> https://github.com/abouchedidxcode/open-source-hands: start from templates/game and follow AGENTS.md and
+> docs/MAKING-A-GAME.md.
 
 Claude Code users can also install the skill in [`skills/hand-gestures`](skills/hand-gestures/SKILL.md).
 
-## Run it
+## Make a game
+
+```bash
+npx degit abouchedidxcode/open-source-hands/templates/game my-game
+cd my-game
+npm install
+npm run dev        # the camera needs https or localhost
+```
+
+Then read [the starter's README](templates/game/README.md) and the [playbook](docs/MAKING-A-GAME.md).
+
+## Run this repo (kit, demo, lab)
 
 ```bash
 npm install
@@ -42,13 +63,13 @@ npm run build && npm run e2e   # demo, lab and example game driven by synthetic 
 node scripts/camera-check.mjs clips/   # real MediaPipe on .y4m clips played as a fake webcam
 ```
 
-## Use it in your project
+## Add the kit to an existing project
 
 The kit is about 1,600 lines of dependency-free TypeScript in `src/kit`. Copy that folder into your
 project, the way shadcn/ui components are copied:
 
 ```bash
-npx degit abouchedidxcode/hand-gesture-kit/src/kit src/hand-gesture-kit
+npx degit abouchedidxcode/open-source-hands/src/kit src/hand-gesture-kit
 npm install @mediapipe/tasks-vision@1.1.0
 mkdir -p public/models public/wasm
 curl -L -o public/models/hand_landmarker.task \

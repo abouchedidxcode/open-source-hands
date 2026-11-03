@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Motes</title>
+    <meta name="description" content="Catch glowing motes at dusk with a pinch of your fingers. A webcam hand game." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='7' fill='%23ffd9a0'/%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <div id="stage"></div>
+    <video id="cam" playsinline muted></video>
+    <canvas id="preview" class="hidden" width="200" height="150"></canvas>
+
+    <div id="hud" class="hud hidden">
+      <span id="score">0</span>
+      <span id="time"></span>
+    </div>
+
+    <section id="title" class="card hidden">
+      <h1>Motes</h1>
+      <svg class="pinch" viewBox="0 0 120 80" aria-hidden="true">
+        <!-- line-art thumb and index finger closing on a mote (animated in style.css) -->
+        <circle class="mote" cx="62" cy="40" r="5" />
+        <path class="finger palm" d="M22 16 C 10 22, 6 32, 6 40 C 6 50, 10 58, 22 64" />
+        <path class="finger index" d="M22 16 C 40 12, 54 24, 58 35" />
+        <path class="finger thumb" d="M22 64 C 40 68, 54 56, 58 45" />
+      </svg>
+      <p>Motes drift up from the meadow. Move your hand under one and <b>pinch</b> to catch it. Gold ones are worth five.</p>
+      <div class="row">
+        <button id="b-cam">Use my camera</button>
+        <button id="b-mouse" class="ghost">Play with mouse or touch</button>
+      </div>
+      <p id="err" class="err"></p>
+      <p class="small">The camera picture stays on your device. Mouse: hold the button to pinch. Space starts, M mutes.</p>
+    </section>
+
+    <section id="results" class="card hidden">
+      <p class="label">Score</p>
+      <p id="r-score" class="big">0</p>
+      <p id="r-line"></p>
+      <p class="small">Pinch, click or press Space to play again.</p>
+    </section>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

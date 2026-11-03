@@ -1,0 +1,61 @@
+:root {
+  --ink: #f6efe2;
+  --ink-dim: rgba(246, 239, 226, 0.72);
+  --warm: #ffd9a0;
+  --card: rgba(22, 18, 28, 0.62);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: #1b1e33; color: var(--ink); font: 500 16px/1.5 Manrope, system-ui, sans-serif; }
+#stage, #stage canvas { position: fixed; inset: 0; display: block; }
+#cam { display: none; }
+.hidden { display: none !important; }
+
+#preview {
+  position: fixed; right: 16px; bottom: 16px; width: 160px; height: 120px;
+  border-radius: 10px; border: 1px solid rgba(255, 233, 207, 0.35); opacity: 0.85;
+}
+
+.hud {
+  position: fixed; top: 18px; left: 0; right: 0; display: flex; justify-content: space-between; padding: 0 28px;
+  font: 400 34px/1 Fraunces, Georgia, serif; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5); pointer-events: none;
+}
+#time { color: var(--ink-dim); }
+
+.card {
+  position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(520px, calc(100vw - 32px));
+  padding: 32px 32px 26px; border-radius: 18px; background: var(--card); backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 233, 207, 0.16); text-align: center;
+}
+.card h1 { margin: 0; font: 400 64px/1 Fraunces, Georgia, serif; letter-spacing: 0.5px; }
+.card p { margin: 12px 0; color: var(--ink-dim); }
+.card b { color: var(--ink); }
+.card .small { font-size: 13px; opacity: 0.8; }
+.card .label { text-transform: uppercase; letter-spacing: 3px; font-size: 12px; font-weight: 700; }
+.card .big { margin: 0; font: 400 96px/1 Fraunces, Georgia, serif; color: var(--warm); }
+.err { color: #ffb4a0 !important; min-height: 1em; }
+
+.row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 18px; }
+button {
+  font: 700 15px/1 Manrope, system-ui, sans-serif; padding: 13px 20px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--warm); background: var(--warm); color: #2a1d14;
+}
+button.ghost { background: transparent; color: var(--ink); border-color: rgba(255, 233, 207, 0.45); }
+button:hover { filter: brightness(1.06); }
+
+/* the how-to drawing: two fingers close on the mote, again and again */
+.pinch { width: 150px; height: 100px; margin: 14px auto 0; display: block; }
+.pinch .finger { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linecap: round; transform-origin: 22px 40px; }
+.pinch .index { animation: pinch-i 2.2s ease-in-out infinite; }
+.pinch .thumb { animation: pinch-t 2.2s ease-in-out infinite; }
+.pinch .mote { fill: var(--warm); animation: mote 2.2s ease-in-out infinite; }
+@keyframes pinch-i { 0%, 15% { transform: rotate(-14deg); } 45%, 70% { transform: rotate(0); } 100% { transform: rotate(-14deg); } }
+@keyframes pinch-t { 0%, 15% { transform: rotate(14deg); } 45%, 70% { transform: rotate(0); } 100% { transform: rotate(14deg); } }
+@keyframes mote { 0%, 40% { opacity: 1; r: 5; } 55% { opacity: 1; r: 8; } 72% { opacity: 0; r: 2; } 90%, 100% { opacity: 1; r: 5; } }
+
+@media (max-width: 520px) {
+  .card h1 { font-size: 48px; }
+  .card .big { font-size: 72px; }
+  .hud { font-size: 26px; padding: 0 18px; }
+  #preview { width: 112px; height: 84px; }
+}

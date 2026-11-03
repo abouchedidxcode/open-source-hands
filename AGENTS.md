@@ -1,7 +1,28 @@
-# AGENTS.md: hand-gesture-kit
+# AGENTS.md: open-source-hands
 
-Instructions for coding agents using this repo to build webcam hand-controlled apps and games, or
-changing the kit itself. Read this before writing code.
+Instructions for coding agents using this repo to build webcam hand-controlled games and apps, or changing the kit
+itself. Read this before writing code.
+
+## Building a game? Start here
+
+1. Copy the starter, a complete small three.js hand game, and run it:
+   ```bash
+   npx degit abouchedidxcode/open-source-hands/templates/game my-game
+   cd my-game && npm install && npm run dev
+   ```
+   Its [README](templates/game/README.md) maps every file.
+2. Read [docs/MAKING-A-GAME.md](docs/MAKING-A-GAME.md): which gestures work, how to be charitable with noisy
+   tracking, the quality bar, how to verify without a webcam, and the bugs that cost us time.
+3. Replace the starter's rules (`src/rules.ts`), scene (`src/scene.ts`) and sound (`src/audio.ts`) with the user's
+   idea. Keep the input layer, the bot pattern, the test hooks and the tools.
+4. Use the rest of this page (API, event names, pitfalls) as reference while you wire gestures.
+5. Before you say it works:
+   - `npm test` and `npm run build` pass
+   - the bot plays a round in `npm run capture`, and you have looked at the screenshots
+   - `npm run fps` shows 60 fps at DPR 2
+   - say plainly that no real webcam was tested, if none was
+
+Adding hand input to an existing app instead? See "Adding the kit to another project" below.
 
 ## What is here
 
@@ -19,6 +40,8 @@ changing the kit itself. Read this before writing code.
 | `src/lab/` + `lab.html` | Gesture Lab: live scores, reliability tests, threshold tuning, config export. |
 | `public/models/hand_landmarker.task` | Google's model (committed). `public/wasm/` is copied from node_modules by `npm run assets` (runs before dev and build). |
 | `tests/` | Vitest unit tests (engine + kit). `scripts/e2e.mjs`: Playwright run of the built site with synthetic hands. |
+| `templates/game/` | **Starter game** (three.js, Vite, TypeScript) with its own copy of the kit, tests and tools. Copy it with degit; it is self-contained. |
+| `docs/MAKING-A-GAME.md` | The game-making playbook. |
 
 ## Commands
 
@@ -137,6 +160,10 @@ frames.flatMap((f) => f.events).some((e) => e.name === 'tap');  // true
   --use-file-for-fake-video-capture=hand.y4m`) work for your own app.
 
 ## Changing the kit itself
+
+- `templates/game/src/hand-gesture-kit/` must stay identical to `src/kit/` (`npm test` checks it). After
+  changing the kit, copy it there: `rm -rf templates/game/src/hand-gesture-kit && cp -R src/kit templates/game/src/hand-gesture-kit`.
+  Then run the starter's tests and build too (`cd templates/game && npm install && npm test && npm run build`).
 
 - Keep `src/kit` free of app code and of dependencies other than `@mediapipe/tasks-vision`.
 - New poses and motions need a test in `tests/engine.test.ts` (synthetic hands for both left and

@@ -23,3 +23,9 @@ Source: <https://github.com/google-ai-edge/mediapipe>.
 - **One Euro filter** (`src/kit/oneEuro.ts`, an original implementation): Géry Casiez, Nicolas
   Roussel and Daniel Vogel, "1€ Filter: A Simple Speed-based Low-pass Filter for Noisy Input in
   Interactive Systems", CHI 2012. <https://gery.casiez.net/1euro/>
+
+## The starter game (`templates/game/`)
+
+The starter also depends on [three.js](https://threejs.org) (MIT) and the Fraunces and Manrope fonts (SIL Open Font
+License 1.1, through `@fontsource/*`). It downloads the same MediaPipe model at setup instead of committing a copy.
+Details are in [templates/game/CREDITS.md](templates/game/CREDITS.md).
